@@ -7,22 +7,48 @@
 
 ## 1.Problem
 
-  - [Problem](https://www.hackerrank.com/challenges/apple-and-orange/problem?isFullScreen=true)(navigate to the Problem)
-  - [Solution](Apple_and_Orange/appleandorange.py) (navigate to the Solution file)
+  - [Problem](https://www.hackerrank.com/challenges/queens-attack-2/problem?isFullScreen=true)(navigate to the Problem)
+  - [Solution](Queens_Attack_2/queens_attack_2.py) (navigate to the Solution file)
   - Explanation:
-  > In this problem, we are given the coordinates of a house and the positions of apple and orange trees. We need to count the number of apples and oranges that fall within a certain range of the house.
+  > In this problem, we are given a square chess board with one queen and a number of obstacles placed on it. we need to determine how many squares the queen can attack.
 
-  ```python
-s, t = map(int, input().split())
-a, b = map(int, input().split())
-m, n = map(int, input().split()) 
-apples = list(map(int, input().split()))
-oranges = list(map(int, input().split()))
+  ```java
+public static int queensAttack(int n, int k, int r_q, int c_q, List<List<Integer>> obstacles) {
+    int top = n - r_q;
+    int bottom = r_q - 1;
+    int left = c_q - 1;
+    int right = n - c_q;
+    
+    int topRight = Math.min(n-c_q,n-r_q);
+    int topLeft = Math.min(n-r_q,c_q-1);
+    int bottomLeft = Math.min(bottom,left);
+    int bottomRight = Math.min(bottom,right);
+    
+    for(List<Integer> obs :obstacles){
 
-count_Apples = sum(1 for apple in apples if s <= a + apple <= t)
-count_Oranges = sum(1 for orange in oranges if s <= b + orange <= t)
-print(count_Apples)
-print(count_Oranges)
+        int r = obs.get(0);
+        int c = obs.get(1);
+        if(r==r_q && c>c_q)
+          right = Math.min(right,c-c_q-1);
+        else if(r==r_q && c<c_q) 
+          left = Math.min(left,c_q - c -1);
+        else if(c==c_q && r>r_q) 
+          top = Math.min(top,r-r_q-1);
+        else if(c==c_q && r<r_q) 
+          bottom = Math.min(bottom,r_q-r-1);
+        else if(r_q-c_q==r-c && c>c_q) 
+          topRight = Math.min(topRight,Math.min(c-c_q-1,r-r_q-1));
+        else if(r_q-c_q==r-c && c<c_q)
+          bottomLeft = Math.min(bottomLeft,Math.min(c_q-c-1,r_q-r-1));
+        else if(r_q+c_q==r+c && c>c_q)
+          bottomRight = Math.min(bottomRight,Math.min(r_q-r-1,c-c_q-1));
+        else if(r_q+c_q==r+c && c<c_q)
+          topLeft = Math.min(topLeft,Math.min(c_q-c-1,r-r_q-1));        
+    }
+    
+    return top + left + bottom + right + topRight + topLeft + bottomLeft + bottomRight;
+
+    }
 ```
   
 ## Problem 2
