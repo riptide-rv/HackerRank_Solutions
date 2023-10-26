@@ -5,10 +5,10 @@
 
 
 
-## 1.Problem
+## 1.Queens Attack 2
 
   - [Problem](https://www.hackerrank.com/challenges/queens-attack-2/problem?isFullScreen=true)(navigate to the Problem)
-  - [Solution](Queens_Attack_2/queens_attack_2.py) (navigate to the Solution file)
+  - [Solution](Queens_Attack_2/queens_attack_2.java) (navigate to the Solution file)
   - Explanation:
   > In this problem, we are given a square chess board with one queen and a number of obstacles placed on it. we need to determine how many squares the queen can attack.
 
